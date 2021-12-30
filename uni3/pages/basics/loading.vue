@@ -2,10 +2,11 @@
 	<view>
 		<cu-custom bgColor="bg-gradual-blue" :isBack="true">
 			<template #backText>返回</template>
-		加载
+			加载
 			<template #right>
 				<view class="action">
 					<view class="cu-load load-cuIcon" :class="!isLoad?'loading':'over'"></view>
+					<CuLoading :loading="!isLoad" iconOnly></CuLoading>
 				</view>
 			</template>
 		</cu-custom>
@@ -14,7 +15,7 @@
 				<text class="cuIcon-title text-blue"></text>背景
 			</view>
 		</view>
-		<view class="cu-load bg-blue" :class="!isLoad?'loading':'over'"></view>
+		<CuLoading :loading="!isLoad" class=" bg-red"></CuLoading>
 		<view class="cu-bar bg-white margin-top">
 			<view class="action">
 				<text class="cuIcon-title text-blue"></text>加载状态
@@ -24,13 +25,14 @@
 			</view>
 		</view>
 		<view class="cu-load bg-grey" :class="!isLoad?'loading':'over'"></view>
+		<CuLoading :loading="!isLoad" class="bg-grey"></CuLoading>
 		<view class="cu-bar bg-white margin-top">
 			<view class="action">
 				<text class="cuIcon-title text-blue"></text>加载错误
 			</view>
 		</view>
 		<view class="cu-load bg-red erro"></view>
-
+		<CuLoading :loading="!isLoad" class="bg-red" error></CuLoading>
 		<view class="cu-bar bg-white margin-top">
 			<view class="action">
 				<text class="cuIcon-title text-blue"></text>弹框加载
@@ -66,10 +68,14 @@
 
 
 <script>
+	import CuLoading from '../../colorui/components/cu-loading.vue'
 	export default {
+		components: {
+			CuLoading
+		},
 		data() {
 			return {
-				CustomBar: this.CustomBar,
+				CustomBar: this.headerInfo.CustomBar,
 				isLoad: false,
 				loadModal: false,
 				loadProgress: 0

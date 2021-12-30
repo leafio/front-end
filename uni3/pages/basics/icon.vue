@@ -4,14 +4,14 @@
 		<view class="cu-bar bg-white search fixed" :style="[{top:CustomBar + 'px'}]">
 			<view class="search-form round">
 				<text class="cuIcon-search"></text>
-<!-- <input type="text" placeholder="搜索cuIcon" confirm-type="search" @input="searchIcon" /> -->
+				<input type="text" placeholder="搜索cuIcon" confirm-type="search" @input="searchIcon" />
 			</view>
 		</view>
 		<view class="cu-list grid col-3">
-			<view class="cu-item" v-for="(item,index) in cuIcon" :key="index" >
-				<template v-if="item.isShow">	<text class="lg text-gray" :class="'cuIcon-' + item.name"></text>
-				<text>{{item.name}}</text></template>
-			
+			<view class="cu-item" v-for="(item,index) in cuIcon" :key="index">
+				<template v-if="item.isShow"> <text class="lg text-gray" :class="'cuIcon-' + item.name"></text>
+					<text>{{item.name}}</text></template>
+
 			</view>
 		</view>
 	</view>
@@ -21,7 +21,7 @@
 	export default {
 		data() {
 			return {
-				CustomBar: this.CustomBar,
+				CustomBar: this.headerInfo.CustomBar,
 				cuIcon: [{
 					name: 'appreciate',
 					isShow: true

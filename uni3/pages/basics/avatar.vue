@@ -87,10 +87,11 @@
 </template>
 
 <script>
+	import { colorList } from "../../common/style";
 	export default {
 		data() {
 			return {
-				ColorList: this.ColorList,
+				ColorList: colorList,
 				avatar: [
 					'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg',
 					'https://ossweb-img.qq.com/images/lol/web201310/skin/big81005.jpg',

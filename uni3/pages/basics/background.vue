@@ -23,8 +23,8 @@
 			</view>
 		</view>
 		<view class="grid col-3 bg-white padding-sm">
-			<view class="padding-sm" v-for="(item,index) in ColorList" :key="index" v-if="index<12">
-				<view class="padding radius text-center light" :class="'bg-' + item.name">
+			<view class="padding-sm" v-for="(item,index) in ColorList" :key="index" >
+				<view class="padding radius text-center light" :class="'bg-' + item.name" v-if="index<12">
 					<view class="text-lg">{{item.title}}</view>
 					<view class="margin-top-sm text-Abc">{{item.name}}</view>
 				</view>
@@ -127,10 +127,11 @@
 </template>
 
 <script>
+import { colorList } from "../../common/style";
 	export default {
 		data() {
 			return {
-				ColorList: this.ColorList,
+				ColorList: colorList,
 			};
 		}
 	}

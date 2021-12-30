@@ -114,10 +114,11 @@
 </template>
 
 <script>
+import { colorList } from "../../common/style";
 	export default {
 		data() {
 			return {
-				ColorList: this.ColorList,
+				ColorList: colorList,
 				color: 'red',
 				loading: false,
 				modalName: '',

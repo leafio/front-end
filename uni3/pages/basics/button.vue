@@ -102,10 +102,11 @@
 </template>
 
 <script>
+import { colorList } from "../../common/style";
 	export default {
 		data() {
 			return {
-				ColorList: this.ColorList,
+				ColorList: colorList,
 				shadow: false,
 				bordersize: ''
 			};
