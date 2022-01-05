@@ -191,7 +191,7 @@
 			</view>
 			<view class="cu-bar search bg-white">
 				<view class="cu-avatar round"
-					style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big11010.jpg">
+					style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big11010.jpg)">
 				</view>
 				<view class="search-form round">
 					<text class="cuIcon-search"></text>

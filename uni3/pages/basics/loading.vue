@@ -79,7 +79,7 @@
 	const loadProgress = ref(0)
 	const headerInfo=inject('headerInfo')
 
-	const CustomBar = reactive(headerInfo.CustomBar)
+	const CustomBar = ref(headerInfo.CustomBar)
 
 	const isLoading = (e) => {
 		isLoad.value = e.detail.value;
