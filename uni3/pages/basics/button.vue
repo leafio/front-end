@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-gradual-blue" :isBack="true">
 			<template #backText>返回</template>
 			按钮
-			</cu-custom>
+		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-title text-blue"></text>按钮形状
@@ -64,8 +64,9 @@
 			</view>
 		</view>
 		<view class="grid col-5 padding-sm">
-			<view class="margin-tb-sm text-center" v-for="(item,index) in ColorList" :key="index" >
-				<button v-if="item.name!='white'"  class="cu-btn round" :class="[bordersize?'lines-' + item.name:'line-' + item.name, shadow?'shadow':'']">{{item.title}}</button>
+			<view class="margin-tb-sm text-center" v-for="(item,index) in ColorList" :key="index">
+				<button v-if="item.name!='white'" class="cu-btn round"
+					:class="[bordersize?'lines-' + item.name:'line-' + item.name, shadow?'shadow':'']">{{item.title}}</button>
 			</view>
 		</view>
 		<view class="cu-bar margin-top bg-white">
@@ -101,24 +102,22 @@
 	</view>
 </template>
 
-<script>
-import { colorList } from "../../common/style";
-	export default {
-		data() {
-			return {
-				ColorList: colorList,
-				shadow: false,
-				bordersize: ''
-			};
-		},
-		methods: {
-			SetShadow(e) {
-				this.shadow = e.detail.value
-			},
-			SetBorderSize(e) {
-				this.bordersize = e.detail.value
-			}
-		}
+<script setup>
+	import {
+		reactive,
+		ref
+	} from 'vue'
+	import {
+		colorList
+	} from "../../common/style";
+	const ColorList = reactive(colorList)
+	const shadow = ref(false)
+	const bordersize = ref('')
+	const SetShadow = (e) => {
+		shadow = e.detail.value
+	}
+	const SetBorderSize = (e) => {
+		bordersize = e.detail.value
 	}
 </script>
 

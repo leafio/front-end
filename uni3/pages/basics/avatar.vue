@@ -86,22 +86,17 @@
 	</view>
 </template>
 
-<script>
-	import { colorList } from "../../common/style";
-	export default {
-		data() {
-			return {
-				ColorList: colorList,
-				avatar: [
-					'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg',
-					'https://ossweb-img.qq.com/images/lol/web201310/skin/big81005.jpg',
-					'https://ossweb-img.qq.com/images/lol/web201310/skin/big25002.jpg',
-					'https://ossweb-img.qq.com/images/lol/web201310/skin/big91012.jpg'
-				],
-
-			};
-		}
-	}
+<script setup>
+	import {reactive} from 'vue'
+	import { colorList } from "../../common/style"
+	const ColorList=reactive(colorList)
+	const avatar=reactive([
+		'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg',
+		'https://ossweb-img.qq.com/images/lol/web201310/skin/big81005.jpg',
+		'https://ossweb-img.qq.com/images/lol/web201310/skin/big25002.jpg',
+		'https://ossweb-img.qq.com/images/lol/web201310/skin/big91012.jpg'
+	])
+	
 </script>
 
 <style>

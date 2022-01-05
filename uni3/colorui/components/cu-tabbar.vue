@@ -6,16 +6,8 @@
 	</view>
 </template>
 
-<script>
-	import CuAction from './cu-action.vue'
-	export default {
-		components: {
-			CuAction
-		},
-		props: {
-
-		}
-	}
+<script setup>
+	
 </script>
 
 <style>

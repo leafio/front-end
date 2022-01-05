@@ -3,10 +3,13 @@
 		<cu-custom bgColor="bg-gradual-blue" :isBack="true"><template #backText>返回</template> 按钮 / 设计</cu-custom>
 		<view class="padding-xl">
 			<view class="box bg-white text-center radius">
-				<button class="cu-btn" :class="[border?bordersize?'lines-' + color:'line-' + color:'bg-'+ color,round?'round':'',size,shadow?'shadow':'']">我是一个按钮</button>
+				<button class="cu-btn"
+					:class="[border?bordersize?'lines-' + color:'line-' + color:'bg-'+ color,round?'round':'',size,shadow?'shadow':'']">我是一个按钮</button>
 			</view>
 			<view class="padding text-center">
-				class="cu-btn <text v-if="color">{{' '}} {{border?bordersize?'lines-' + color:'line-' + color:'bg-'+ color}} {{round?'round':''}} {{size}} {{shadow?'shadow':''}}</text>"
+				class="cu-btn <text v-if="color">{{' '}}
+					{{border?bordersize?'lines-' + color:'line-' + color:'bg-'+ color}} {{round?'round':''}} {{size}}
+					{{shadow?'shadow':''}}</text>"
 			</view>
 		</view>
 		<view class="cu-form-group margin-top" @tap="showModal" data-target="ColorModal">
@@ -64,60 +67,62 @@
 					</view>
 				</view>
 				<view class="grid col-5 padding">
-					<view class="padding-xs" v-for="(item,index) in ColorList" :key="index" @tap="SetColor" :data-color="item.name" v-if="item.name!='white'">
-						<view class="padding-tb radius" :class="'bg-' + item.name"> {{item.title}} </view>
-					</view>
+					<template v-for="(item,index) in ColorList" :key="index">
+						<view class="padding-xs" @tap="SetColor" :data-color="item.name" v-if="item.name!='white'">
+							<view class="padding-tb radius" :class="'bg-' + item.name"> {{item.title}} </view>
+						</view>
+					</template>
+
 				</view>
 			</view>
 		</view>
 	</view>
 </template>
 
-<script>
-import { colorList } from "../../common/style";
-	export default {
-		data() {
-			return {
-				ColorList: colorList,
-				modalName: '',
-				round: false,
-				size: '',
-				color: 'red',
-				shadow: false,
-				border: false,
-				bordersize: ''
-			};
-		},
-		methods: {
-			showModal(e) {
-				this.modalName = e.currentTarget.dataset.target
-			},
-			hideModal(e) {
-				this.modalName = null
-			},
-			SetRound(e) {
-				this.round = e.detail.value
-			},
-			SetSize(e) {
-				this.size = e.detail.value
-			},
-			SetColor(e) {
-				this.color = e.currentTarget.dataset.color;
-				this.modalName = null
-			},
-			SetShadow(e) {
-				this.shadow = e.detail.value
-			},
-			SetBorder(e) {
-				this.border = e.detail.value
-				if (!e.detail.value) {
-					this.bordersize = false
-				}
-			},
-			SetBorderSize(e) {
-				this.bordersize = e.detail.value
-			}
+<script setup>
+	import {
+		ref,
+		reactive
+	} from 'vue'
+	import {
+		colorList
+	} from "../../common/style";
+	const ColorList = reactive(colorList)
+	const modalName = ref('')
+	const round = ref(false)
+	const size = ref('')
+	const color = ref('red')
+	const shadow = ref(false)
+	const border = ref(false)
+	const bordersize = ref('')
+
+	const showModal = (e) => {
+		modalName.value = e.currentTarget.dataset.target
+	}
+	const hideModal = (e) => {
+		modalName.value = null
+	}
+	const SetRound = (e) => {
+		round.value = e.detail.value
+	}
+	const SetSize = (e) => {
+		size.value = e.detail.value
+	}
+	const SetColor = (e) => {
+		color.value = e.currentTarget.dataset.color;
+		modalName.value = null
+	}
+	const SetShadow = (e) => {
+		shadow.value = e.detail.value
+	}
+	const SetBorder = (e) => {
+		border.value = e.detail.value
+		if (!e.detail.value) {
+			bordersize.value = false
 		}
+	}
+	const SetBorderSize = (e) => {
+		bordersize.value = e.detail.value
 	}
 </script>
 

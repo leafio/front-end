@@ -2,8 +2,8 @@
 	<view>
 		<cu-custom bgColor="bg-gradual-blue" :isBack="true"><template #backText>返回</template>布局</cu-custom>
 		<scroll-view scroll-x class="bg-white nav text-center fixed" :style="[{top:CustomBar + 'px'}]">
-			<view class="cu-item" :class="index==TabCur?'text-blue cur':''" v-for="(item,index) in tabNav" :key="index" @tap="tabSelect"
-			 :data-id="index">
+			<view class="cu-item" :class="index==TabCur?'text-blue cur':''" v-for="(item,index) in tabNav" :key="index"
+				@tap="tabSelect" :data-id="index">
 				{{tabNav[index]}}
 			</view>
 		</scroll-view>
@@ -99,8 +99,10 @@
 				<view class="action"></view>
 			</view>
 			<view class="bg-white padding">
-				<view class="grid margin-bottom text-center" v-for="(item,index) in 5" :key="index" :class="'col-' + (index+1)">
-					<view class="padding" :class="indexs%2==0?'bg-cyan':'bg-blue'" v-for="(item,indexs) in (index+1)*2" :key="indexs">{{indexs+1}}</view>
+				<view class="grid margin-bottom text-center" v-for="(item,index) in 5" :key="index"
+					:class="'col-' + (index+1)">
+					<view class="padding" :class="indexs%2==0?'bg-cyan':'bg-blue'" v-for="(item,indexs) in (index+1)*2"
+						:key="indexs">{{indexs+1}}</view>
 				</view>
 			</view>
 			<view class="cu-bar bg-white  margin-top solid-bottom">
@@ -111,7 +113,8 @@
 			</view>
 			<view class="bg-white padding">
 				<view class="grid col-4 grid-square">
-					<view class="bg-img" v-for="(item,index) in avatar" :key="index" :style="[{ backgroundImage:'url(' + avatar[index] + ')' }]"></view>
+					<view class="bg-img" v-for="(item,index) in avatar" :key="index"
+						:style="[{ backgroundImage:'url(' + avatar[index] + ')' }]"></view>
 				</view>
 			</view>
 		</template>
@@ -181,23 +184,27 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				CustomBar: this.CustomBar,
-				TabCur: 0,
-				avatar:['https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg','https://ossweb-img.qq.com/images/lol/web201310/skin/big81005.jpg','https://ossweb-img.qq.com/images/lol/web201310/skin/big25002.jpg','https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'],
-				tabNav: ['Flex布局', 'Grid布局', '辅助布局']
-			};
-		},
-		methods: {
-			tabSelect(e) {
-				this.TabCur = e.currentTarget.dataset.id;
-				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
-			}
-		}
+<script setup>
+	import {
+		ref,
+		reactive,
+		inject
+	} from 'vue'
+	const TabCur = ref(0)
+	const avatar = reactive(['https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg',
+		'https://ossweb-img.qq.com/images/lol/web201310/skin/big81005.jpg',
+		'https://ossweb-img.qq.com/images/lol/web201310/skin/big25002.jpg',
+		'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
+	])
+	const tabNav = reactive(['Flex布局', 'Grid布局', '辅助布局'])
+	const scrollLeft=ref(0)
+	const headerInfo=inject('headerInfo')
+	const CustomBar = ref(headerInfo.CustomBar)
+	const tabSelect = (e) => {
+		TabCur.value = e.currentTarget.dataset.id;
+		scrollLeft.value = (e.currentTarget.dataset.id - 1) * 60
 	}
+
 </script>
 
 <style>

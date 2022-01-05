@@ -104,8 +104,10 @@
 					</view>
 				</view>
 				<view class="grid col-5 padding">
-					<view class="padding-xs" v-for="(item,index) in ColorList" :key="index" @tap="SetColor" :data-color="item.name" >
-						<view v-if="item.name!='gray' && item.name!='white'"  class="padding-tb radius" :class="'bg-' + item.name"> {{item.title}} </view>
+					<view class="padding-xs" v-for="(item,index) in ColorList" :key="index" @tap="SetColor"
+						:data-color="item.name">
+						<view v-if="item.name!='gray' && item.name!='white'" class="padding-tb radius"
+							:class="'bg-' + item.name"> {{item.title}} </view>
 					</view>
 				</view>
 			</view>
@@ -113,39 +115,42 @@
 	</view>
 </template>
 
-<script>
-import { colorList } from "../../common/style";
-	export default {
-		data() {
-			return {
-				ColorList: colorList,
-				color: 'red',
-				loading: false,
-				modalName: '',
-				active: false
-			};
-		},
-		onLoad: function() {
-			let that = this;
-			setTimeout(function() {
-				that.loading = true
-			}, 500)
-		},
-		methods: {
-			showModal(e) {
-				this.modalName = e.currentTarget.dataset.target
-			},
-			hideModal(e) {
-				this.modalName = null
-			},
-			SetColor(e) {
-				this.color = e.currentTarget.dataset.color;
-				this.modalName = null
-			},
-			SetActive(e) {
-				this.active = e.detail.value
-			},
-		}
+<script setup>
+	import {
+		ref,
+		reactive
+	} from 'vue'
+	import {
+		onLoad
+	} from '@dcloudio/uni-app'
+	import {
+		colorList
+	} from "../../common/style"
+	const ColorList = reactive(colorList)
+	const color = ref('red')
+	const loading = ref(false)
+	const modalName = ref('')
+	const active = ref(false)
+
+
+	onLoad(() => {
+		setTimeout(() => {
+			loading.value = true
+		}, 500)
+	})
+
+	const showModal = (e) => {
+		modalName.value = e.currentTarget.dataset.target
+	}
+	const hideModal = (e) => {
+		modalName.value = null
+	}
+	const SetColor = (e) => {
+		color.value = e.currentTarget.dataset.color
+		modalName.value = null
+	}
+	const SetActive = (e) => {
+		active.value = e.detail.value
 	}
 </script>
 

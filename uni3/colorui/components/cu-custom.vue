@@ -15,53 +15,45 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				StatusBar: this.headerInfo.StatusBar,
-				CustomBar: this.headerInfo.CustomBar
-			};
-		},
-		name: 'cu-custom',
-		computed: {
-			style() {
+<script setup>
+	import {
+		ref,
+		computed,
+		inject
+	} from 'vue'
 
-				const {StatusBar,CustomBar} =this.headerInfo
-				const bgImage = this.bgImage;
-				let style = `height:${CustomBar}px;padding-top:${StatusBar}px;`;
-				if (this.bgImage) {
-					style = `${style}background-image:url(${bgImage});`;
-				}
-				console.log(style)
-				return style
-			}
-		},
-		props: {
-			bgColor: {
-				type: String,
-				default: ''
-			},
-			isBack: {
-				type: [Boolean, String],
-				default: false
-			},
-			bgImage: {
-				type: String,
-				default: ''
-			},
-		},
-		methods: {
-			BackPage() {
-				if (getCurrentPages().length < 2 && 'undefined' !== typeof __wxConfig) {
-					let url = '/' + __wxConfig.pages[0]
-					return uni.redirectTo({url})
-				}
-				uni.navigateBack({
-					delta: 1
-				});
-			}
+	const headerInfo = inject('headerInfo')
+
+	const {
+		bgColor,
+		isBack,
+		bgImage
+	} = defineProps({
+		bgColor: String,
+		isBack: Boolean | String,
+		bgImage: String
+	})
+	const StatusBar = ref(headerInfo.StatusBar)
+	const CustomBar = ref(headerInfo.CustomBar)
+	const style = computed(() => {
+		let style = `height:${CustomBar.value}px;padding-top:${StatusBar.value}px;`;
+		if (bgImage) {
+			style = `${style}background-image:url(${bgImage});`;
 		}
+		console.log(style)
+		return style
+
+	})
+	const BackPage = () => {
+		if (getCurrentPages().length < 2 && 'undefined' !== typeof __wxConfig) {
+			let url = '/' + __wxConfig.pages[0]
+			return uni.redirectTo({
+				url
+			})
+		}
+		uni.navigateBack({
+			delta: 1
+		});
 	}
 </script>
 

@@ -1,7 +1,14 @@
 <script>
+	const headerInfo = {}
 	export default {
+		provide(){
+			return{
+				headerInfo
+			}
+		},
+		
 		onLaunch: function() {
-			const headerInfo = {}
+			
 			uni.getSystemInfo({
 				success: function(e) {
 				console.log(e)

@@ -27,11 +27,12 @@
 			</view>
 		</view>
 		<view class='padding-sm flex flex-wrap'>
-			<view class="padding-xs" v-for="(item,index) in ColorList" :key="index" >
+			<view class="padding-xs" v-for="(item,index) in ColorList" :key="index">
 				<view class='cu-tag' :class="'bg-' + item.name" v-if="item.name!='gray'">{{item.title}}</view>
 			</view>
-			<view class="padding-xs" v-for="(item,index) in ColorList" :key="index" >
-				<view class='cu-tag light' :class="'bg-' + item.name" v-if="item.name!='gray' && item.name!='black' && item.name!='white'">{{item.title}}</view>
+			<view class="padding-xs" v-for="(item,index) in ColorList" :key="index">
+				<view class='cu-tag light' :class="'bg-' + item.name"
+					v-if="item.name!='gray' && item.name!='black' && item.name!='white'">{{item.title}}</view>
 			</view>
 		</view>
 		<view class="cu-bar bg-white margin-top">
@@ -40,7 +41,7 @@
 			</view>
 		</view>
 		<view class='padding-sm flex flex-wrap'>
-			<view class="padding-xs" v-for="(item,index) in ColorList" :key="index" >
+			<view class="padding-xs" v-for="(item,index) in ColorList" :key="index">
 				<view class='cu-tag' :class="'line-' + item.name" v-if="item.name!='white'">{{item.title}}</view>
 			</view>
 		</view>
@@ -101,7 +102,8 @@
 				港
 				<view class="cu-tag badge">99+</view>
 			</view>
-			<view class='cu-avatar xl radius' style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg)">
+			<view class='cu-avatar xl radius'
+				style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg)">
 				<view class='cu-tag badge'>9</view>
 			</view>
 			<view class='cu-avatar xl radius'>
@@ -115,15 +117,15 @@
 	</view>
 </template>
 
-<script>
-import { colorList } from "../../common/style";
-	export default {
-		data() {
-			return {
-				ColorList: colorList,
-			};
-		}
-	}
+<script setup>
+	import {
+		reactive
+	} from 'vue'
+	import {
+		colorList
+	} from "../../common/style";
+
+	const ColorList = reactive(colorList)
 </script>
 
 <style>

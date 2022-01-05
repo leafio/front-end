@@ -26,18 +26,11 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-		return {
-				PageCur: 'basics'
-			}
-		},
-		methods: {
-			NavChange: function(e) {
-				this.PageCur = e.currentTarget.dataset.cur
-			}
-		}
+<script setup>
+	import {ref} from 'vue'
+	const PageCur = ref('basics')
+	const NavChange = (e) => {
+		PageCur.value = e.currentTarget.dataset.cur
 	}
 </script>
 

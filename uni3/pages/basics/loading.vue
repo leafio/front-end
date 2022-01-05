@@ -67,40 +67,37 @@
 </template>
 
 
-<script>
+<script setup>
+	import {
+		reactive,
+		ref,
+		inject
+	} from 'vue'
 	import CuLoading from '../../colorui/components/cu-loading.vue'
-	export default {
-		components: {
-			CuLoading
-		},
-		data() {
-			return {
-				CustomBar: this.headerInfo.CustomBar,
-				isLoad: false,
-				loadModal: false,
-				loadProgress: 0
-			};
-		},
-		methods: {
-			isLoading(e) {
-				this.isLoad = e.detail.value;
-			},
-			LoadModal(e) {
-				this.loadModal = true;
-				setTimeout(() => {
-					this.loadModal = false;
-				}, 2000)
-			},
-			LoadProgress(e) {
-				this.loadProgress = this.loadProgress + 3;
-				if (this.loadProgress < 100) {
-					setTimeout(() => {
-						this.LoadProgress();
-					}, 100)
-				} else {
-					this.loadProgress = 0;
-				}
-			}
+	const isLoad = ref(false)
+	const loadModal = ref(false)
+	const loadProgress = ref(0)
+	const headerInfo=inject('headerInfo')
+
+	const CustomBar = reactive(headerInfo.CustomBar)
+
+	const isLoading = (e) => {
+		isLoad.value = e.detail.value;
+	}
+	const LoadModal = (e) => {
+		loadModal.value = true;
+		setTimeout(() => {
+			loadModal.value = false;
+		}, 2000)
+	}
+	const LoadProgress = (e) => {
+		loadProgress.value = loadProgress.value + 3;
+		if (loadProgress.value < 100) {
+			setTimeout(() => {
+				LoadProgress();
+			}, 100)
+		} else {
+			loadProgress.value = 0;
 		}
 	}
 </script>

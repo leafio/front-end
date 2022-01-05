@@ -126,15 +126,11 @@
 	</view>
 </template>
 
-<script>
+<script setup>
+	import {reactive} from 'vue'
 import { colorList } from "../../common/style";
-	export default {
-		data() {
-			return {
-				ColorList: colorList,
-			};
-		}
-	}
+const ColorList=reactive(colorList)
+	
 </script>
 
 <style>

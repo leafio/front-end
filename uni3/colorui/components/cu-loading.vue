@@ -17,57 +17,49 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		props: {
-			loading: {
-				type: Boolean,
-				default: false
-			},
-			error: {
-				type: Boolean,
-				default: false
-			},
-			loadingText: {
-				type: String,
-				default: '加载中...'
-			},
-			errorText: {
-				type: String,
-				default: '加载失败'
-			},
-			completeText: {
-				type: String,
-				default: '没有更多了'
-			},
-			iconOnly: {
-				type: Boolean,
-				default: false
-			}
+<script setup>
+	import {
+		computed
+	} from 'vue'
+	const props = defineProps({
+		loading: {
+			type: Boolean,
+			default: false
 		},
-		computed: {
-			cur_status() {
-				if (this.error) return 'erro'
-				if (this.loading) return 'loading'
-				return 'over'
-			},
-			cur_text() {
-				if (this.error) return this.errorText
-				if (this.loading) return this.loadingText
-				return this.completeText
-			}
+		error: {
+			type: Boolean,
+			default: false
 		},
-
-		data() {
-			return {
-				statusOptions: [
-					'loading',
-					'over',
-					'error'
-				]
-			}
+		loadingText: {
+			type: String,
+			default: '加载中...'
+		},
+		errorText: {
+			type: String,
+			default: '加载失败'
+		},
+		completeText: {
+			type: String,
+			default: '没有更多了'
+		},
+		iconOnly: {
+			type: Boolean,
+			default: false
 		}
-	}
+	})
+
+	const cur_status = computed(() => {
+		if (props.error) return 'erro'
+		if (props.loading) return 'loading'
+		return 'over'
+	})
+	const cur_text = computed(() => {
+		if (props.error) return props.errorText
+		if (props.loading) return props.loadingText
+		return props.completeText
+	})
+
+	
 </script>
 
 <style lang="scss" scoped>

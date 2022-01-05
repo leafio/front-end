@@ -11,40 +11,38 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		props: {
-			text: {
-				type: [String, Number],
-				default: ''
-			},
-			img: {
-				type: String,
-				default: ''
-			},
-			textStyle: {
-				type: String,
-				default: ''
-			},
-			badgeText: {
-				type: [String, Number],
-				default: ''
-			},
-			showBadgle: {
-				type: Boolean,
-				default: false
-			},
-			cuIconClass: {
-				type: String,
-				default: ''
-			},
-			isButton: {
-				type: Boolean,
-				default: false
-			}
-
+<script setup>
+	defineProps({
+		text: {
+			type: [String, Number],
+			default: ''
+		},
+		img: {
+			type: String,
+			default: ''
+		},
+		textStyle: {
+			type: String,
+			default: ''
+		},
+		badgeText: {
+			type: [String, Number],
+			default: ''
+		},
+		showBadgle: {
+			type: Boolean,
+			default: false
+		},
+		cuIconClass: {
+			type: String,
+			default: ''
+		},
+		isButton: {
+			type: Boolean,
+			default: false
 		}
-	}
+
+	})
 </script>
 
 <style>
