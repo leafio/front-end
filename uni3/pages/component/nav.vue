@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<cu-custom bgcolor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<template #backText>返回</template>导航栏
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
@@ -8,13 +8,7 @@
 				<text class="cuIcon-title text-orange"></text>默认
 			</view>
 		</view>
-		<cu-navbar
-			class="bg-white"
-			:list="list"
-			:current="TabCur"
-			@on-change="onNavChange"
-			:active-style="{ color: Color.green }"
-		></cu-navbar>
+		<cu-navbar class="bg-white" :list="list" :current="TabCur" @on-change="onNavChange" :active-style="{ color: Color.green }"></cu-navbar>
 
 		<view class="cu-bar bg-white margin-top solid-bottom">
 			<view class="action">
@@ -22,29 +16,14 @@
 			</view>
 		</view>
 
-		<cu-navbar
-			class="bg-white"
-			:list="list"
-			:current="TabCur"
-			@on-change="onNavChange"
-			text-center
-			:active-style="{ color: Color.orange }"
-		></cu-navbar>
+		<cu-navbar class="bg-white" :list="list" :current="TabCur" @on-change="onNavChange" text-center :active-style="{ color: Color.orange }"></cu-navbar>
 
 		<view class="cu-bar bg-white margin-top solid-bottom">
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text>平分
 			</view>
 		</view>
-		<cu-navbar
-			class="bg-white"
-			:list="list"
-			:current="TabCur"
-			@on-change="onNavChange"
-			text-center
-			:active-style="{ color: Color.blue }"
-			even
-		></cu-navbar>
+		<cu-navbar class="bg-white" :list="list" :current="TabCur" @on-change="onNavChange" text-center :active-style="{ color: Color.blue }" even></cu-navbar>
 
 		<view class="cu-bar bg-white margin-top solid-bottom">
 			<view class="action">
@@ -52,14 +31,7 @@
 			</view>
 		</view>
 
-		<cu-navbar
-			class="bg-red"
-			:list="list"
-			:current="TabCur"
-			@on-change="onNavChange"
-			text-center
-			:active-style="{ color: 'white' }"
-		></cu-navbar>
+		<cu-navbar class="bg-red" :list="list" :current="TabCur" @on-change="onNavChange" text-center :active-style="{ color: 'white' }"></cu-navbar>
 		<view class="cu-bar bg-white margin-top solid-bottom">
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text>图标
@@ -79,30 +51,28 @@
 	</view>
 </template>
 
-<script  lang="ts" setup>
+<script lang="ts" setup>
 import {
 	ref,
-	reactive,
-
-} from 'vue'
-import CuNavbar from '../../colorui/components/cu-navbar.vue'
+	reactive
+} from "vue";
+import CuNavbar from "../../colorui/components/cu-navbar.vue";
 import {
 	Color
-} from '../../common/style'
+} from "../../common/style";
 
-const TabCur = ref(0)
-const scrollLeft = ref(0)
-const list = reactive([])
+const TabCur = ref(0);
+const scrollLeft = ref(0);
+const list = reactive([]);
 
-const _list = []
+const _list = [];
 for (let i = 0; i < 4; i++) {
-	_list.push('Tab' + i)
+	_list.push("Tab" + i);
 }
-Object.assign(list, _list)
+Object.assign(list, _list);
 const onNavChange = (index) => {
-	TabCur.value = index
-}
+	TabCur.value = index;
+};
 </script>
 
-<style>
-</style>
+<style></style>

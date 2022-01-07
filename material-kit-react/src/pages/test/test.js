@@ -9,9 +9,11 @@ import {
   CardContent,
   Stack,
   Button,
-  ButtonGroup
+  ButtonGroup,
+  Container
 } from '@material-ui/core';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
+import Page from '../../components/Page';
 import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../../components/_dashboard/blog';
 import {
   addJsonStringPropQuot,
@@ -664,12 +666,33 @@ const modeOptions = [
   value: item.name,
   mode: item.mode
 }));
+let desc = false;
+let i = 0;
+let j = 0;
 
 export default function Test() {
-  const [curTheme, setCurTheme] = useState({ name: 'default', value: 'monokai' });
-  const [curMode, setCurMode] = useState({ label: 'html', value: 'html', mode: 'htmlmixed' });
+  console.log('function-start');
+  j += 1;
+  console.log('j', j);
   const [content, SetContent] = useState('');
-
+  const [curModeIndex, setCurModeIndex] = useState(0);
+  const [curThemeIndex, setCurThemeIndex] = useState(0);
+  const [initData, SetInitData] = useState('');
+  const [testData, SetTestData] = useState('');
+  // useEffect(() => {
+  //   console.log('xxx');
+  //   if (testData !== j) {
+  //     SetTestData(j);
+  //   }
+  //   return () => {
+  //     console.log('yyyy');
+  //   };
+  // });
+  useEffect(() => {
+    console.log('effect active');
+    setCurThemeIndex(themeOptions.findIndex((item) => item.label === 'darcula'));
+    setCurModeIndex(modeOptions.findIndex((item) => item.label === 'HTML'));
+  }, []);
   const toggleConvert = () => {
     const jsonString = content;
     let isJson = true;
@@ -678,80 +701,104 @@ export default function Test() {
       JSON.parse(jsonString);
     } catch (error) {
       isJson = false;
+      console.log('json', jsonString);
       console.log(error);
     }
     //  如果是Json，则返回JS对象
     if (isJson) {
-      SetContent(removeJsonStringPropQuot(jsonString));
+      SetInitData(removeJsonStringPropQuot(jsonString));
     } else {
-      SetContent(addJsonStringPropQuot(jsonString));
+      SetInitData(addJsonStringPropQuot(jsonString));
     }
   };
+
   const handleSortJson = () => {
+    console.log('sort', desc);
+    i += 1;
+    console.log(i);
     const jsonString = content;
     let isJson = true;
     try {
       const jsonObj = JSON.parse(jsonString);
-      SetContent(JSON.stringify(jsonSort(jsonObj)));
+      SetInitData(JSON.stringify(jsonSort(jsonObj, desc)));
+
+      desc = !desc;
     } catch (error) {
       isJson = false;
+
       console.log(error);
     }
+    console.log('result', desc);
   };
   const toggleExpand = () => {
     const jsonString = content;
     if (jsonString.includes('\n')) {
-      SetContent(compressJsonString(jsonString));
+      SetInitData(compressJsonString(jsonString));
     } else {
-      SetContent(expandJsonString(jsonString));
+      SetInitData(expandJsonString(jsonString));
     }
   };
   const handleChange = (editor, data, value) => {
     // console.log('change', editor, data, value);
     SetContent(value);
   };
+  const handleThemeChange = (val, index) => {
+    console.log(val, index);
+    setCurThemeIndex(index);
+  };
+  const handleModeChange = (val, index) => {
+    console.log(val, index);
+    setCurModeIndex(index);
+  };
 
-  useEffect(() => {
-    console.log(curTheme);
-  });
   return (
-    <Grid>
-      <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
-        {/* <BlogPostsSearch posts={POSTS} /> */}
-        <BlogPostsSort options={themeOptions} onSort={setCurTheme} />
-        <BlogPostsSort options={modeOptions} onSort={setCurMode} />
-        <ButtonGroup
-          variant="contained"
-          color="primary"
-          aria-label="contained primary button group"
-        >
-          <Button onClick={toggleConvert}>Json Js</Button>
-          <Button onClick={handleSortJson}>排序</Button>
-          <Button onClick={toggleExpand}>展开/压缩</Button>
-        </ButtonGroup>
-      </Stack>
-      <CodeMirror
-        value={content}
-        options={{
-          mode: {
-            name: curMode.mode
-          },
-          // autofocus: true,
-          autoCloseTags: true,
-          styleActiveLine: true,
-          lineWrapping: true,
-          foldGutter: true,
-          gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-          theme: curTheme.value,
-          lineNumbers: true,
-          smartIndent: true,
-          keyMap: 'sublime',
-          showHint: true
-        }}
-        onChange={(editor, data, value) => {
-          handleChange(editor, data, value);
-        }}
-      />
-    </Grid>
+    <Page title="code-test">
+      <Container>
+        <Grid container spacing={2}>
+          <BlogPostsSort
+            options={themeOptions}
+            onSort={handleThemeChange}
+            current={curThemeIndex}
+          />
+          <BlogPostsSort options={modeOptions} onSort={handleModeChange} current={curModeIndex} />
+
+          <ButtonGroup
+            variant="contained"
+            color="primary"
+            aria-label="contained primary button group"
+          >
+            <Button onClick={toggleConvert}>Json Js</Button>
+            <Button onClick={handleSortJson}>排序</Button>
+            <Button onClick={toggleExpand}>展开/压缩</Button>
+            <Button>{testData}</Button>
+          </ButtonGroup>
+
+          <Grid item xs={12}>
+            <CodeMirror
+              value={initData}
+              options={{
+                mode: {
+                  name: modeOptions[curModeIndex].mode
+                },
+                // autofocus: true,
+                autoCloseTags: true,
+                styleActiveLine: true,
+                // lineWrapping: true,
+                foldGutter: true,
+                gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+                theme: themeOptions[curThemeIndex].value,
+                lineNumbers: true,
+                smartIndent: true,
+                keyMap: 'sublime',
+                showHint: true
+              }}
+              onChange={(editor, data, value) => {
+                handleChange(editor, data, value);
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Container>
+    </Page>
   );
 }

@@ -7,19 +7,24 @@ import { useEffect, useState } from 'react';
 
 DropDown.propTypes = {
   options: PropTypes.array,
-  onSort: PropTypes.func
+  onSort: PropTypes.func,
+  current: PropTypes.number
 };
 
-export default function DropDown({ options, onSort }) {
-  const [option, setOption] = useState(options[0]);
-  useEffect(() => {
-    onSort(option);
-    console.log('drop', option);
-  }, [option]);
+export default function DropDown({ options, current = 0, onSort }) {
+  // const [option, setOption] = useState(options[current]);
+  const onClick = (opt, index) => {
+    // setOption(opt);
+    onSort(opt, index);
+  };
+  // useEffect(() => {
+  //   onSort(option);
+  //   console.log('drop', option);
+  // }, [option]);
   return (
-    <TextField select size="small" value={option.value}>
+    <TextField select size="small" value={options[current].value}>
       {options.map((opt, index) => (
-        <MenuItem key={index} value={opt.value} onClick={() => setOption(opt)}>
+        <MenuItem key={index} value={opt.value} onClick={() => onClick(opt, index)}>
           {opt.label}
         </MenuItem>
       ))}

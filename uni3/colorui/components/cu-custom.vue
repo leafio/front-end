@@ -19,10 +19,17 @@
 	import {
 		ref,
 		computed,
-		inject
+		inject,
+		getCurrentInstance
 	} from 'vue'
 
-	const headerInfo = inject('headerInfo')
+	// const headerInfo = inject('headerInfo')
+	let headerInfo //获取全局变量中的 headerInfo
+	  {
+	    const app = getCurrentInstance()
+	    headerInfo = app.appContext.config.globalProperties.headerInfo
+	
+	  }
 
 	const {
 		bgColor,

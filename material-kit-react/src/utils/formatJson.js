@@ -8,24 +8,27 @@ export function removeJsonStringPropQuot(jsonString) {
   return jsonString.replace(/"\w+":/g, (word) => word.replaceAll('"', ''));
 }
 export function addJsonStringPropQuot(jsonString) {
+  console.log('----add', jsonString);
   jsonString = jsonString.replaceAll("'", '"');
   // 去除多余的逗号
   jsonString = jsonString.replace(/,\W+\}/g, (word) => word.replaceAll(',', ''));
   return jsonString.replace(/\w+:/g, (word) => {
+    console.log('--', word);
     const key = word.replace(':', '');
     return `"${key}":`;
   });
 }
 
 // Json对象属性排序
-export function jsonSort(jsonObj) {
+export function jsonSort(jsonObj, desc = false) {
+  // console.log('start-jsonSort');
   const arr = [];
   let result;
   // 数组不需要重新排序
   if (Array.isArray(jsonObj)) {
     result = [];
     jsonObj.forEach((item) => {
-      if (item instanceof Object) item = jsonSort(item);
+      if (item instanceof Object) item = jsonSort(item, desc);
       result.push(item);
     });
   } else {
@@ -35,11 +38,18 @@ export function jsonSort(jsonObj) {
     // for (const key in jsonObj) {
     //   arr.push(key);
     // }
-    arr.sort();
+    if (desc) {
+      arr.sort().reverse();
+      console.log('sort-desc', desc);
+    } else {
+      console.log('asc', desc);
+      arr.sort();
+    }
+
     result = {};
     arr.forEach((key) => {
       let item = jsonObj[key];
-      if (item instanceof Object) item = jsonSort(item);
+      if (item instanceof Object) item = jsonSort(item, desc);
       result[key] = item;
     });
   }

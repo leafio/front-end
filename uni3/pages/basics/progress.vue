@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<cu-custom bgcolor="bg-gradual-blue" :isBack="true">
+		<cu-custom bgColor="bg-gradual-blue" :isBack="true">
 			<template #backText>返回</template>进度条
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
