@@ -4,8 +4,9 @@ import { Link as RouterLink } from 'react-router-dom';
 // material
 import { Grid, Button, Container, Stack, Typography } from '@material-ui/core';
 // components
+import DropDown from '../../components/DropDown';
 import Page from '../../components/Page';
-import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../../components/_dashboard/blog';
+import { BlogPostCard, BlogPostsSearch } from '../../components/_dashboard/blog';
 //
 import POSTS from '../../_mocks_/blog';
 
@@ -42,7 +43,7 @@ export default function First() {
 
         <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
           <BlogPostsSearch posts={POSTS} />
-          <BlogPostsSort options={SORT_OPTIONS} onSort={onSort} />
+          <DropDown options={SORT_OPTIONS} onSort={onSort} />
         </Stack>
 
         <Grid container spacing={3}>

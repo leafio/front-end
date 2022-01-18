@@ -1,20 +1,8 @@
 import { useEffect, useState } from 'react';
-import {
-  Box,
-  Link,
-  Card,
-  Grid,
-  Avatar,
-  Typography,
-  CardContent,
-  Stack,
-  Button,
-  ButtonGroup,
-  Container
-} from '@material-ui/core';
+import { Grid, Button, ButtonGroup, Container } from '@material-ui/core';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
 import Page from '../../components/Page';
-import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../../components/_dashboard/blog';
+import DropDown from '../../components/DropDown';
 import {
   addJsonStringPropQuot,
   removeJsonStringPropQuot,
@@ -679,15 +667,7 @@ export default function Test() {
   const [curThemeIndex, setCurThemeIndex] = useState(0);
   const [initData, SetInitData] = useState('');
   const [testData, SetTestData] = useState('');
-  // useEffect(() => {
-  //   console.log('xxx');
-  //   if (testData !== j) {
-  //     SetTestData(j);
-  //   }
-  //   return () => {
-  //     console.log('yyyy');
-  //   };
-  // });
+
   useEffect(() => {
     console.log('effect active');
     setCurThemeIndex(themeOptions.findIndex((item) => item.label === 'darcula'));
@@ -755,12 +735,8 @@ export default function Test() {
     <Page title="code-test">
       <Container>
         <Grid container spacing={2}>
-          <BlogPostsSort
-            options={themeOptions}
-            onSort={handleThemeChange}
-            current={curThemeIndex}
-          />
-          <BlogPostsSort options={modeOptions} onSort={handleModeChange} current={curModeIndex} />
+          <DropDown options={themeOptions} onChange={handleThemeChange} current={curThemeIndex} />
+          <DropDown options={modeOptions} onChange={handleModeChange} current={curModeIndex} />
 
           <ButtonGroup
             variant="contained"

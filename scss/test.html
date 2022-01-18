@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<link rel="stylesheet" href="test.css">
+<style>
+    .cube{
+        width: 100px;
+        height: 100px;
+        background-color: aquamarine;
+    }
+    p {
+  width: 300px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+</style>
+<body>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+    </p>
+    <div class="container">
+        <div class="cube margin-top-xs"></div>
+        <div class="cube margin-top-lg"></div>
+        <div class="cube margin"></div>
+        <div class="cube margin text-red text-shadow shadow" style="font-size: 64px;">dfsdfs</div>
+        <div class="cube margin text-mauve bg-green light">dffdfd</div>
+        <div class="cube bg-blue"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+    </div>
+   <script>
+       // 方式二
+/* 样式代码 */
+var styleTitle1 = `
+font-size: 20px;
+font-weight: 600;
+color: rgb(244,167,89);
+`
+var styleTitle2 = `
+font-style: oblique;
+font-size:14px;
+color: rgb(244,167,89);
+font-weight: 400;
+`
+var styleContent = `
+color: rgb(30,152,255);
+`
+ 
+/* 内容代码 */
+var title1 = '🌒 Mars3D '
+var title2 = '三维地球平台软件'
+var content = `
+版 本 号：2.1.0    【Cesium版本：1.71】
+编译日期：2020-7-26 19:39:39 
+版权声明：
+1. Mars3D版权完全属于 "合肥火星科技有限公司".
+2. Mars3D中mars3d.js程序包，任何个人和机构在遵守下列条件的前提下授权永久使用：
+	1）不进行任何形式的破解和裁剪，程序包完整引用
+	2）保留此版权信息在控制台输出
+我们保留对此版权信息的最终解释权.
+ 
+🏠官网:  http://cesium.marsgis.cn
+📞微信:  http://marsgis.cn/weixin.html
+`
+console.log(`%c${title1} %c${title2}
+%c${content}`, styleTitle1, styleTitle2, styleContent)
+   </script>
+</body>
+</html>
